@@ -1,9 +1,12 @@
 
-ul.games-list
+ul.matches-list, ul.games-list
   margin: 0
   padding: 0
 
   li
+    background: #eee
+    border-radius: 5px
+
     text-align: center
     list-style-type: none
     margin: 0
@@ -14,24 +17,20 @@ ul.games-list
     margin-bottom: 40px
     font-size: larger
 
+    td.avatar
+      width: 45%
+
     .vs
-      width: 20px
+      width: 7em
       font-weight: bold
       text-align: center
 
     .avatar
       text-align: center
+      opacity: 0.5
       img
         width: 80px
-        margin: 1px
         border: 5px solid #fff
-
-    .player-name
-      width: 40%
-      &.player1
-        text-align: right
-      &.player2
-        text-align: left
 
     .scores
       .score1, .score2
@@ -41,6 +40,7 @@ ul.games-list
     &.player1-wins .player1, &.player2-wins .player2
       color: #080
       font-weight: bold
+      opacity: 1.0
 
     &.player1-wins .avatar.player1 img,
     &.player2-wins .avatar.player2 img

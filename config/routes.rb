@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#logout', as: 'logout'
   get '/unauthorized' => 'sessions#unauthorized'
 
-
-  resources :games
-
+  resources :matches
   resources :users
 
   root to: 'sessions#login'

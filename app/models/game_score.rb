@@ -3,4 +3,6 @@ class GameScore < ActiveRecord::Base
   belongs_to :player
 
   validates :game, :player, presence: true
+
+  validates :score, presence: true
 end

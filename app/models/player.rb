@@ -1,8 +1,9 @@
-# Player joins a user to a game.
-# It is where the scoring for a given game is stored
+# Player joins a user to a match.
 class Player < ActiveRecord::Base
   belongs_to :user
-  belongs_to :game
+  belongs_to :match
 
-  validates :user, :game, presence: true
+  has_many :scores
+
+  validates :user, :match, presence: true
 end

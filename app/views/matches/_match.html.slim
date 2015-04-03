@@ -1,0 +1,39 @@
+
+ruby:
+  p1 = match.players.first
+  p2 = match.players.last
+  u1 = p1.user
+  u2 = p2.user
+  winner = match.winner
+  best_of = match.games.size > 1
+
+li.match
+  table class=(winner == p1 ? 'player1-wins' : 'player2-wins')
+    tr.heading
+      td colspan=3
+        h4= match.finished_at.in_time_zone('EST').strftime("%A %B %e, %Y at %l:%M%P")
+        h4
+          - if best_of
+            | Best of #{match.games.size} games
+          - else
+            | Straight up one-on-one
+
+    tr.players
+      td.avatar.player1
+        = avatar(u1)
+        .name = u1.name
+      td.vs vs
+
+      td.avatar.player2
+        = avatar(u2)
+        .name = u2.name
+
+    tr.scores
+      td colspan=3
+        h2
+          | #{winner.user.first_name} wins,&nbsp;
+          - if best_of
+            | #{match.games.for_winner(p1).count} games to #{match.games.for_winner(p2).count}
+          - else
+            | #{match.games.first.score_for(p1)} to #{match.games.first.score_for(p2)}
+

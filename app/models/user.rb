@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     self.email = self.email.try(:downcase).try(:strip)
   end
 
+  def first_name
+    name.split(' ').first
+  end
+
   class AuthorizationError < StandardError; end
 
   def self.find_or_create_from_auth_hash(auth_hash)
