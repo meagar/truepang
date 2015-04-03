@@ -1,0 +1,12 @@
+= form_for @game, class: 'form' do |f|
+  .form-group.num-players
+    = label_tag :num_players
+    = select_tag :num_players, options_for_select((1..16).to_a)
+
+
+coffee:
+
+  addParticipant = ->
+    numParticipants = $('#new_game .participant').length
+
+    $('form#new_game').append("<div class='form-group'>

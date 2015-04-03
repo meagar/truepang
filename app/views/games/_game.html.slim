@@ -1,0 +1,30 @@
+ruby:
+  p1 = game.players.first
+  p2 = game.players.last
+  u1 = p1.user
+  u2 = p2.user
+  winner = p1.score > p2.score ? p1 : p2
+
+li.game
+  table class=(winner == p1 ? 'player1-wins' : 'player2-wins')
+    tr
+      td.player-name.player1
+        = u1.name
+
+      td.avatar.player1
+        = avatar(u1)
+
+      td.vs vs
+
+      td.avatar.player2
+        = avatar(u2)
+
+      td.player-name.player2
+        = u2.name
+
+    tr.scores
+      td
+      td.player1= p1.score
+      td
+      td.player2= p2.score
+      td
