@@ -1,0 +1,21 @@
+ruby:
+  # Map them to an array of ratings for the given player
+  graph_points = matches.reverse.map { |m| m.ratings.for(user).out }
+
+  # Add the players current score to the end of the graph
+  graph_points.concat([user.elo_rating])
+
+  # Turn it into [[x1,y1], [x2,y2]] for graphing
+  graph_points.map!.with_index { |s,i| [i, s] }
+
+h3 Rating over Time
+
+#graph style="height: 300px"
+
+javascript:
+  window.plots = #{graph_points.to_json};
+
+coffee:
+  $ ->
+    $.plot($('#graph'), [{ data: plots, lines: { show: true }, points: { show: true } }], { xaxis: { show: false }} )
+

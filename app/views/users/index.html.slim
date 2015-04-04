@@ -1,4 +1,11 @@
 
-ul.users-list
-  = render @users
+table.table.table-striped.users-list
+  thead
+    tr
+      th.rank Rank
+      th.player Player
+      th.games Games
+      th.rating Rating
+  tbody
+    = render @users
 

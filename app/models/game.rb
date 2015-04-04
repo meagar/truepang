@@ -5,13 +5,10 @@ class Game < ActiveRecord::Base
 
   validates :match, presence: true
 
-  def self.for_winner(winner)
-    return []#all.select { |g| g.winner == winner }
-  end
+  scope :finished, -> { where('finished_at is not null') }
 
   def winner_id
-    return nil if scores.length == 0
-    scores.max_by { |s| s.score }.player_id
+    scores.max_by { |s| s.score }.try(:player_id)
   end
 
   def score_for(player)

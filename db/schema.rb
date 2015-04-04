@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 6) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "elo_ratings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.float    "in"
+    t.float    "out"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "elo_ratings", ["match_id"], name: "index_elo_ratings_on_match_id", using: :btree
+  add_index "elo_ratings", ["user_id"], name: "index_elo_ratings_on_user_id", using: :btree
 
   create_table "game_scores", force: :cascade do |t|
     t.integer  "game_id"
@@ -64,6 +76,8 @@ ActiveRecord::Schema.define(version: 5) do
     t.datetime "updated_at",                null: false
   end
 
+  add_foreign_key "elo_ratings", "matches"
+  add_foreign_key "elo_ratings", "users"
   add_foreign_key "game_scores", "games"
   add_foreign_key "game_scores", "players"
   add_foreign_key "games", "matches"

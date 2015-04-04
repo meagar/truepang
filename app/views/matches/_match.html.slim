@@ -20,13 +20,18 @@ li.match
 
     tr.players
       td.avatar.player1
-        = avatar(u1)
-        .name = u1.name
+        = link_to u1 do
+          = avatar(u1)
+          .name #1 #{u1.name}
+          .elo = elo u1.elo_rating
+
       td.vs vs
 
       td.avatar.player2
-        = avatar(u2)
-        .name = u2.name
+        = link_to u2 do
+          = avatar(u2)
+          .name #1 #{u2.name}
+          .elo = elo u2.elo_rating
 
     tr.scores
       td colspan=3

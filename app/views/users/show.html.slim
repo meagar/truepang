@@ -1,0 +1,33 @@
+.row
+  .col-md-12
+    .media
+      .media-left
+        img.media-object src=avatar_path(@user) width=160
+      .media-body
+        h2.media-heading= @user.name
+        .rank
+          b Rank: ##{@users.index(@user) + 1}
+        .rating Rating: #{elo @user.elo_rating}
+        .alias Alias: #{@user.username}
+        .matches Matches: #{@matches.size}
+        .wins Won: #{@wins.size}
+        .losses Lost: #{@losses.size}
+.row
+  .col-md-12
+    h3 Matches
+
+    table.table.table-striped.user-matches
+      thead
+        tr
+          th.date Date
+          th.rating Rating
+          th.opponent Opponent
+          th.result Result
+          th.result +/-
+          th.Rating Rating
+      tbody
+        = render collection: @matches, partial: 'users/match', locals: { user: @user }
+
+.row
+  .col-md-12
+    = render 'graph', matches: @matches, user: @user

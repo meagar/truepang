@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
   has_many :players
-  has_many :games, through: :players
+  has_many :matches, through: :players
+  has_many :ratings, class_name: 'EloRating'
 
   validates :uid, presence: true
   validates :name, :email, presence: true
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
 
   before_validation :normalize_email
 
-  scope :active, -> { where(active: true) }
+  scope :active, -> { where('elo_rating is not null').where(active: true) }
 
   def normalize_email
     self.email = self.email.try(:downcase).try(:strip)

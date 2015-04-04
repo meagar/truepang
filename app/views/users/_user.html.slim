@@ -1,7 +1,14 @@
 
-li.user.media
-  = link_to user do
-    .media-left
-      img.media-object src=user.image
-    .media-body
-      = user.name
+tr.user
+  td.rank ##{user_counter + 1}
+  td.player
+    .media
+    = link_to user do
+      .media-left
+        img.media-object src=avatar_path(user)
+      .media-body
+        h4 = user.name
+        h5 = user.username
+  td.games
+    = 45
+  td.rating = elo user.elo_rating

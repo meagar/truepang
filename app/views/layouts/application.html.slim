@@ -5,8 +5,18 @@ html
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
+    link href='/favicon.png' rel='icon'
 
   body
     = render 'nav'
     .container
+      - if flash[:notice]
+        .alert.alert-success.alert-dismissible role="alert"
+          button.close type="button" data-dismiss="alert" aria-label="Close"
+            span aria-hidden="true" &times;
+          strong Notice: = flash[:notice]
       = yield
+
+    .footer
+      .text-center
+        | (╯°□°）╯︵ ┻━┻

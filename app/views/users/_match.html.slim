@@ -1,0 +1,26 @@
+- cache match do
+  ruby:
+    players = match.players.all
+    us = players.find { |p| p.user == user }
+    them = players.find { |p| p.user != user }
+    winner = match.winner
+    rating_us = EloRating.where(match: match, user: user).first
+    rating_them = EloRating.where(match: match, user: them.user).first
+
+  tr
+    td.date = match.finished_at.in_time_zone('EST').to_s(:short)
+    td.me
+      | Me #{elo rating_us.in}
+    td.opponent
+      = link_to them.user do
+        img src=avatar_path(them.user) width=32
+        = them.user.name
+        = elo rating_them.in
+    td.result
+      - if winner == us
+        b Won
+      - else
+        | Lost
+
+    td.movement = diff rating_us
+    td.rating = elo rating_us.out
